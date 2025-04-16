@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async and JSON</title>
+</head>
+
+<body>
+    <h1>Async and JSON Example</h1>
+    <p id="result"></p>
+    <script>
+        // Simulated asynchronous function fetching JSON data
+        async function fetchData() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        name: "Alice",
+                        age: 25,
+                        job: "Developer"
+                    });
+                }, 2000); // Simulates a 2-second delay
+            });
+        }
+
+        // Dependent function using the async function's result
+        async function processData() {
+            try {
+                const data = await fetchData(); // Wait for fetchData to complete
+                const result = `Name: ${data.name}, Age: ${data.age}, Job: ${data.job}`;
+                document.getElementById("result").innerHTML = result; // Display in HTML
+            } catch (error) {
+                document.getElementById("result").innerHTML = "Error fetching data!";
+            }
+        }
+
+        // Call the dependent function
+        processData();
+    </script>
+</body>
+
+</html>
